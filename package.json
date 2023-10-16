@@ -1,0 +1,49 @@
+{
+  "name": "docgen",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite-react-ssg dev",
+    "build": "ldoc -q --filter _pregen.ldoc.filter --config _pregen/config.ld  ./lua && vite-react-ssg build",
+    "build:standalone": "vite-react-ssg build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "serve ./dist -l 3000",
+    "ldoc:generate": "ldoc -q --filter _pregen.ldoc.filter --config _pregen/config.ld  ./lua"
+  },
+  "dependencies": {
+    "@mdx-js/rollup": "^2.3.0",
+    "@radix-ui/react-slot": "^1.0.2",
+    "@types/node": "^20.8.6",
+    "@types/react-syntax-highlighter": "^15.5.8",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "lucide-react": "^0.287.0",
+    "path": "^0.12.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-markdown": "^9.0.0",
+    "react-syntax-highlighter": "^15.5.0",
+    "remark-gfm": "^4.0.0",
+    "tailwind-merge": "^1.14.0",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@types/mdx": "^2.0.8",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react": "^4.0.3",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "postcss": "^8.4.31",
+    "react-router-dom": "^6.16.0",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5",
+    "vite-react-ssg": "^0.3.3"
+  }
+}

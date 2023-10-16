@@ -1,0 +1,78 @@
+return (
+    <div>
+      <div className="border-b pb-2 mb-2">
+        <h1 className="text-2xl font-semibold">{module.name}</h1>
+        <p>{module.summary}</p>
+      </div>
+      {module.description != "" && (
+        <p className="border-b pb-2">
+          <Description description={module.description} />
+        </p>
+      )}
+
+      <div className="flex flex-col gap-4 mt-4">
+        <div className="bg-blue-300 rounded-lg p-5">
+          <h2 className="text-lg font-light">Functions</h2>
+          <p className="text-zinc-600 text-sm font-light">
+            List of functions exported by the module.
+          </p>
+        </div>
+        {items.map((item) => (
+          <div key={item.name} className="bg-border p-5 rounded-lg">
+            <div className="border-b border-zinc-600 pb-2">
+              <h2 className="text-lg font-semibold p-0 m-0 flex items-center">
+                <RealmIcon realm={item.tags.realm[0]} />
+                {item.name}
+                {item.args}
+              </h2>
+              <p>
+                <Description description={item.description} />
+              </p>
+            </div>
+
+            <div className="mt-2">
+              {Array.isArray(item.paramsList) && item.paramsList.length > 0 && (
+                <div>
+                  <div>
+                    <h5 className="font-light text-sm text-blue-400 uppercase">
+                      Arguments
+                    </h5>
+                  </div>
+                  <div className="flex flex-col gap-2 mt-2">
+                    {((item.paramsList as string[]) || []).map((param) => {
+                      const paramMeta = item.modifiers.param[param];
+                      const paramDescription = item.paramsMap[param] as string;
+
+                      return (
+                        <div className="flex flex-col gap-1">
+                          <div className="flex gap-2">
+                            <div className="bg-blue-400 px-2 py-1">{param}</div>
+                            <div className="bg-orange-300 px-4 py-1">
+                              {paramMeta.type}
+                            </div>
+                            {paramMeta.opt === true && (
+                              <div className="bg-green-300 px-4 py-1">
+                                optional
+                              </div>
+                            )}
+                            {typeof paramMeta.opt === "string" && (
+                              <div className="bg-green-300 px-4 py-1">
+                                default: {paramMeta.opt}
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex-1 ml-4">
+                            <Description description={paramDescription} />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
